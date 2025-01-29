@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "ringoffire1-9a613": {
+      "hosting": {
+        "ringoffire": [
+          "ringoffire1-9a613"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "ringoffire1-9a613"
+  }
+}

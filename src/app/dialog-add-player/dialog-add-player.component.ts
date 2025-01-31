@@ -17,7 +17,7 @@ import { MatButtonModule } from '@angular/material/button';
 })
 export class DialogAddPlayerComponent {
   name: string = '';
-  length: any;
+  length: any='';
 
 
   constructor(public dialogRef: MatDialogRef<DialogAddPlayerComponent>) {

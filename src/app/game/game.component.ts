@@ -15,6 +15,7 @@ import { elementAt, Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { StartScreenComponent } from '../start-screen/start-screen.component';
 import { GameService } from '../game.service';
+import { PlayerMobileComponent } from '../player-mobile/player-mobile.component';
 
 
 
@@ -26,7 +27,7 @@ import { GameService } from '../game.service';
 @Component({
   selector: 'app-game',
   standalone: true,
-  imports: [CommonModule, PlayerComponent, MatButtonModule, MatIconModule, MatDialogModule, GameInfoComponent, MatCardModule, AsyncPipe, StartScreenComponent],
+  imports: [CommonModule, PlayerComponent, MatButtonModule, MatIconModule, MatDialogModule, GameInfoComponent, MatCardModule, AsyncPipe, StartScreenComponent,PlayerMobileComponent],
   templateUrl: './game.component.html',
   styleUrl: './game.component.scss'
 })
@@ -51,8 +52,8 @@ export class GameComponent implements OnInit {
           console.log('Game Update', element.data());
           let data = element.data();
           this.game.currentPlayer = data['currentPlayer'];
-          this.game.playedCards = data['playCards'];
-          this.game.players = data['players'];
+          this.game.playedCards = data['playedCards'];
+          this.game.players = data['player'];
           this.game.stack = data['stack'];
           this.game.pickCardanimation = data['pickCardanimation'];
           this.game.currentCard = data['currentCard'];
@@ -104,12 +105,15 @@ export class GameComponent implements OnInit {
 
   takeCard() {
     if (!this.game.pickCardanimation) {
+      
       this.game.currentCard = this.game.stack.pop();
-      this.saveGame();
+     
       console.log(this.game.currentCard);
       this.game.pickCardanimation = true;
+      
       this.game.currentPlayer++;
       this.game.currentPlayer = this.game.currentPlayer % this.game.players.length;
+      this.saveGame();
 
       setTimeout(() => {
         this.game.playedCards.push(this.game.currentCard);
@@ -123,8 +127,9 @@ export class GameComponent implements OnInit {
 
   openDialog(): void {
     let dialogRef = this.dialog.open(DialogAddPlayerComponent,);
-
+debugger
     dialogRef.afterClosed().subscribe((name: string) => {
+     
       if (name && name.length > 0) {
         this.game.players.push(name);
       }

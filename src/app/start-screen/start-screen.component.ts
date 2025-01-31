@@ -22,7 +22,7 @@ firestore: Firestore = inject(Firestore);
 
 
  async newGame() {
-  debugger
+
     let game = new Game();
     await addDoc(collection(this.firestore, 'games'), game.toJson()).catch(
       (err) => { console.error(err) }

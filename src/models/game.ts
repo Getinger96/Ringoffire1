@@ -5,10 +5,10 @@ export class Game {
     public playedCards: string[] = [];
     public currentPlayer: number = 0;
     public pickCardanimation: boolean = false;
-    public currentCard: string='';
+    public currentCard: any='';
 
     constructor() {
-        debugger
+ 
         for (let i = 1; i < 14; i++) {
             this.stack.push('ace_' + i)
             this.stack.push('clubs_' + i)
